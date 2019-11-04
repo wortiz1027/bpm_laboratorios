@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>co.com.bpm</groupId>
+  <artifactId>bpm_laboratorio1</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>sar</packaging>
+  
+  <!--
+           This POM was generated from the SOA Maven Archetype.
+           Comments in this POM guide you how to use it with your project.
+           This POM relates to this SOA Composite, i.e. the one in this same directory.
+           There is another POM in the SOA Application directory (up one) which handles 
+           the whold SOA Application, which may contain additional projects.
+
+           The parent points to the common SOA parent POM.  That is a special POM that is 
+           shipped by Oracle as a point of customization (only).  You can add default values
+           for properties like serverUrl, etc. to the SOA common parent POM, so that you
+           do not have to specify them over and over in every project POM. 
+    -->
+    
+  <parent>
+    <groupId>com.oracle.soa</groupId>
+    <artifactId>sar-common</artifactId>
+    <version>12.2.1-3-0</version>
+    <relativePath></relativePath>
+  </parent>
+  
+  <!-- 
+        Informacion de la empresa que implementa el proyecto
+  -->
+  <organization>
+    <name>Developer</name>
+    <url>http://willmanortiz.wordpress.com/</url>
+  </organization>
+  
+  <!-- 
+        Informacion de la licencia del proyecto
+  -->
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+  
+  <!-- 
+        Informacion de los desarrolladores que intervienen en el proceso
+  -->
+  <developers>
+    <developer>
+      <id>wortiz</id>
+      <name>Wilman Ortiz</name>
+      <url>http://willmanortiz.wordpress.com/</url>
+      <organization>Developer</organization>
+      <organizationUrl>http://willmanortiz.wordpress.com/</organizationUrl>
+      <roles>
+        <role>Arquitecto</role>
+        <role>Desarrollador</role>
+      </roles>
+      <timezone>America/Bogota</timezone>
+      <properties>
+        <picture>http://www.oorsprong.org/WebSamples.CountryInfo/Images/Colombia.jpg</picture>
+      </properties>
+    </developer>
+  </developers>
+  
+  <!-- 
+        Informacion del repositorio donde se almacenan los fuentes
+  -->
+  <scm>
+    <url>https://gitlab.com/wortiz1027/bpm_laboratorios</url>
+    <connection>scm:git:https://gitlab.com/wortiz1027/bpm_laboratorios.git</connection>
+    <developerConnection>scm:git:https://gitlab.com/wortiz1027/bpm_laboratorios.git</developerConnection>
+    <tag>master</tag>
+  </scm>
+  <!-- 
+        Informacion del servidor de integracion continua
+  -->
+  <ciManagement>
+    <system>jenkins</system>
+    <url>http://centos-cicd1:8080/</url>
+    <notifiers>
+      <notifier>
+        <type>mail</type>
+        <sendOnError>true</sendOnError>
+        <sendOnFailure>true</sendOnFailure>
+        <sendOnSuccess>false</sendOnSuccess>
+        <sendOnWarning>false</sendOnWarning>
+        <configuration>
+          <address>willman.ortiz@gmail.com</address>
+        </configuration>
+      </notifier>
+    </notifiers>
+  </ciManagement>
+  
+  <!-- 
+        Informacion del manejador de bugs
+  -->
+  <issueManagement>
+    <system>gitlab</system>
+    <url>https://gitlab.com/wortiz1027/bpm_laboratorios/issues</url>
+  </issueManagement>
+  
+  <!-- 
+        Informacion del repositorio de artefactos y binarios
+  -->
+  <distributionManagement>
+    <snapshotRepository>
+      <id>devops-snapshots</id>
+      <name>Internal Snapshots</name>
+      <url>http://centos-cicd1:8081/repository/devops-snapshots/</url>
+      <layout>default</layout>
+    </snapshotRepository>
+    <repository>
+      <id>devops-releases</id>
+      <name>Internal Releases</name>
+      <url>http://centos-cicd:8081/repository/devops-releases/</url>
+      <layout>default</layout>
+    </repository>
+  </distributionManagement>
+  
+  <!-- 
+        Definicion de perfiles de los diferentes ambientes
+  -->
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <env>dev</env>
+      </properties>
+    </profile>
+    <profile>
+      <id>qa</id>
+      <properties>
+        <env>qa</env>
+      </properties>
+    </profile>
+    <profile>
+      <id>prd</id>
+      <properties>
+        <env>prd</env>
+      </properties>
+    </profile>
+  </profiles>
+  
+  <pluginRepositories>
+    <pluginRepository>
+      <id>smartbear-sweden-plugin-repository</id>
+      <url>http://www.soapui.org/repository/maven2/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  
+  <properties>
+    <!-- These parameters are used by the compile goal -->
+    <scac.input.dir>${project.basedir}/SOA/</scac.input.dir>
+    <scac.output.dir>${project.basedir}/target</scac.output.dir>
+    <scac.input>${scac.input.dir}/composite.xml</scac.input>
+    <scac.output>${scac.output.dir}/out.xml</scac.output>
+    <scac.error>${scac.output.dir}/error.txt</scac.error>
+    <scac.displayLevel>1</scac.displayLevel>
+    <!-- if you are using a config plan, uncomment the following line and update to point
+             to your config plan -->
+    <!--<configplan>${scac.input.dir}/configplan.xml</configplan>-->
+    <!-- These parameters are used by the deploy and undeploy goals -->
+    <composite.name>${project.artifactId}</composite.name>
+    <composite.revision>1.0</composite.revision>
+    <composite.partition>default</composite.partition>
+    <serverUrl>${soa.deploy.url}</serverUrl>
+    <user>${weblogic.username}</user>
+    <password>${weblogic.password}</password>
+    <overwrite>true</overwrite>
+    <forceDefault>true</forceDefault>
+    <regenerateRulebase>false</regenerateRulebase>
+    <keepInstancesOnRedeploy>true</keepInstancesOnRedeploy>
+    <!-- These parameters are used by the test goal 
+         if you are using the sca-test (test) goal, you need to uncomment the following
+             line and point it to your jndi.properties file. -->
+    <!--<jndi.properties.input>UNDEFINED</jndi.properties.input>-->
+    <jndi.properties.input>${project.basedir}/tmp/${env}/${env}.properties</jndi.properties.input>
+    <scatest.result>${scac.output.dir}/testResult</scatest.result>
+    <!--  input is the name of the composite to run test suties against -->
+    <input>${project.artifactId}</input>
+    <!--<
+		scac.ant.buildfile>${env.MW_HOME}/soa/bin/ant-sca-compile.xml</scac.ant.buildfile>
+        <sca.ant.testfile>${env.MW_HOME}/soa/bin/ant-sca-test.xml</sca.ant.testfile>
+    -->
+    <oracleHome>${oracle.home}</oracleHome>
+    <version.soapui>5.1.0</version.soapui>
+  </properties>
+  
+  <!--
+           These refer to the properties defined above.  You should probably not need to make 
+           any changes beflow this point - these just point to the properties above.
+    -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.oracle.soa.plugin</groupId>
+        <artifactId>oracle-soa-plugin</artifactId>
+        <version>12.2.1-3-0</version>
+        <configuration>
+          <compositeName>bpm_laboratorio1</compositeName>
+          <composite>${scac.input}</composite>
+          <sarLocation>${scac.output.dir}/sca_${project.artifactId}_rev${version}.jar</sarLocation>
+          <serverUrl>${serverUrl}</serverUrl>
+          <!-- note: compositeRevision is needed to package, revision is needed to undeploy -->
+          <compositeRevision>${composite.revision}</compositeRevision>
+          <revision>${composite.revision}</revision>
+          <scacInputDir>${scac.input.dir}</scacInputDir>
+          <!-- Uncomment the appHome property if your composite 
+                         depends on MDS. -->
+          <!--<appHome>${project.basedir}/..</appHome>-->
+          <!--  If you have a composite which contains a component that 
+                          depends on MDS (eg. Human Task, Business Rule) AND you 
+                          want to use a file-based MDS repository, then you 
+                          need to do either:
+                          1. update the .adf/META-INF/adf-config.xml to point to
+                             the correct location of the file based repository, i.e.
+                             remove the reference to ${oracle.home} in that file, or
+                          2. define oracleHome here and leave the adf-config.xml file
+                             as is.  Note that the correct value is the path to 
+                             your SOA Quickstart or JDeveloper install directory, 
+                             with "/soa" appended to it.
+                    -->
+          <!--<oracleHome>JDEV_HOME/soa</oracleHome>-->
+          <user>${user}</user>
+          <password>${password}</password>
+          <input>${input}</input>
+        </configuration>
+        <!-- extensions=true is needed to use the custom sar packaging type -->
+        <extensions>true</extensions>
+      </plugin>
+      
+      <plugin>
+        <groupId>com.oracle.adf.plugin</groupId>
+        <artifactId>ojdeploy</artifactId>
+        <version>12.2.1-3-0</version>
+        <configuration>
+          <ojdeploy>${oracleHome}/jdeveloper/jdev/bin/ojdeploy</ojdeploy>
+          <workspace>${basedir}/../bpm_laboratorios.jws</workspace>
+          <project>bpm_laboratorio1</project>
+          <profile>bpm_laboratorio1</profile>
+          <outputfile>${project.build.directory}/${project.build.finalName}.jar</outputfile>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>deploy</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>1.4.1</version>
+        <executions>
+          <execution>
+            <id>enforce-property</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireProperty>
+                  <property>env</property>
+                  <message>+-----------------------------------------------+ 
+                           | Debe digitar un valor para la propiedad 'env' | 
+                           | Ejemplo: mvn -Denv=dev                        | 
+                           +-----------------------------------------------+</message>
+                </requireProperty>
+                <requireProperty>
+                  <property>soapSkip</property>
+                  <message>+-----------------------------------------------+ 
+                           | Debe digitar un valor para la propiedad 'env' | 
+                           | Ejemplo: mvn -DsoapSkip=true|false            |
+                           +-----------------------------------------------+</message>
+                </requireProperty>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>read-project-properties</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <files>
+            <file>${project.basedir}/tmp/${env}/${env}.properties</file>
+          </files>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+        <executions>
+          <execution>
+            <id>copy-config-plan</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.basedir}/SOA</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}</directory>
+                  <includes>
+                    <include>configPlan.xml</include>
+                  </includes>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-project-properties</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.basedir}/tmp/${env}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/../env/${env}</directory>
+                  <includes>
+                    <include>*.properties</include>
+                  </includes>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${project.basedir}/tmp</directory>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>com.google.code.maven-replacer-plugin</groupId>
+        <artifactId>replacer</artifactId>
+        <version>1.5.3</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>replace</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <ignoreMissingFile>true</ignoreMissingFile>
+          <file>${scac.input}</file>
+          <xpath>//composite/@revision</xpath>
+          <token>^.*$</token>
+          <value>${composite.revision}</value>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>com.smartbear.soapui</groupId>
+        <artifactId>soapui-maven-plugin</artifactId>
+        <version>${version.soapui}</version>
+        <configuration>
+          <projectFile>${project.basedir}/src/main/resources/soapui/countries_info_servcie_soapui_project.xml</projectFile>
+          <outputFolder>target/surefire-reports</outputFolder>
+          <junitReport>true</junitReport>
+          <printReport>true</printReport>
+          <exportAll>true</exportAll>
+          <testFailIgnore>${soapSkip}</testFailIgnore>
+          <endpoint>${endpoint}</endpoint>
+        </configuration>
+        <executions>
+          <execution>
+            <id>countries_info_servcie</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.smartbear.soapui</groupId>
+            <artifactId>soapui</artifactId>
+            <version>${version.soapui}</version>
+            <exclusions>
+              <exclusion>
+                <groupId>javafx</groupId>
+                <artifactId>jfxrt</artifactId>
+              </exclusion>
+            </exclusions>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+    
+    <sourceDirectory>${project.basedir}/SOA/SCA-INF/src/</sourceDirectory>
+    <outputDirectory>${project.basedir}/SOA/SCA-INF/classes/</outputDirectory>
+    
+    <filters>
+      <filter>${project.basedir}/../env/${env}/${env}.properties</filter>
+    </filters>
+    
+  </build>
+  
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <configuration>
+          <outputDirectory>target/site/soapui</outputDirectory>
+          <reportsDirectories>
+            <reportsDirectories>target/soapui/</reportsDirectories>
+          </reportsDirectories>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+  
+</project>

@@ -16,6 +16,8 @@ cwallet.sso.lck
 *.ear
 .data/
 temp/
+tmp/
+tmp/*
 classes/
 deploy/
 javadoc/

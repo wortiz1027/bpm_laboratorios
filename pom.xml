@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-         xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>co.com.bpm</groupId>
   <artifactId>bpm_laboratorios</artifactId>
@@ -9,11 +8,31 @@
   <modules>
     <!-- Add project modules -->
     <module>bpm_laboratorio1</module>
-  </modules>
+    <module>bpm_laboratorio2</module>
+  	<module>bpm_laboratorio3</module>
+    </modules>
   <dependencies>
     <dependency>
       <groupId>co.com.bpm</groupId>
       <artifactId>bpm_laboratorio1</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>sar</type>
+    </dependency>
+    <dependency>
+      <groupId>co.com.bpm</groupId>
+      <artifactId>Project1</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>co.com.bpm</groupId>
+      <artifactId>bpm_laboratorio2</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>co.com.bpm</groupId>
+      <artifactId>bpm_laboratorio3</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>sar</type>
     </dependency>

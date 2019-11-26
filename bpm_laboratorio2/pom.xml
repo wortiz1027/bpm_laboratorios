@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>co.com.bpm</groupId>
+  <artifactId>bpm_laboratorio2</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <description>MDS con los artefactos comunes para el desarrollo de los proceso</description>
+    <!-- 
+        Informacion de la organizacion 
+    -->
+    <organization>
+        <name>developer.io</name>
+        <url>http://willmanortiz.wordpress.com/</url>
+    </organization>
+	
+    <!-- 
+        Informacion de la licencia 
+    -->
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+	
+    <!-- 
+        Informacion del equipo de desarrollo :p 
+    -->
+    <developers>
+        <developer>
+            <id>wortiz</id>
+            <name>Wilman Ortiz</name>
+            <url>http://willmanortiz.wordpress.com/</url>
+            <organization>Developer</organization>
+            <organizationUrl>http://willmanortiz.wordpress.com/</organizationUrl>
+            <roles>
+                <role>Arquitecto</role>
+                <role>Desarrollador</role>
+            </roles>
+            <timezone>America/Bogota</timezone>
+            <properties>
+                <picture>http://www.oorsprong.org/WebSamples.CountryInfo/Images/Colombia.jpg</picture>
+            </properties>
+        </developer>
+    </developers>
+	
+    <!-- 
+        Repositorios maven 
+    -->
+    <repositories>
+        <repository>
+            <id>devops-group</id>
+            <url>http://centos-cicd1:8081/repository/devops-group/</url>          
+        </repository>
+        <repository>
+            <id>maven-public</id>
+            <url>http://centos-cicd1:8081/repository/maven-public/</url>
+        </repository>        
+    </repositories>
+	
+    <!-- 
+         Configuracion repositorios de distribucion de artefactos 
+    -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>devops-snapshots</id>
+            <url>http://centos-cicd1:8081/repository/devops-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>devops-releases</id>
+            <url>http://centos-cicd1:8081/repository/devops-releases/</url>
+        </repository>
+    </distributionManagement>
+    <!-- 
+        Definicion de perfiles de los diferentes ambientes
+    -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>qa</id>
+            <properties>
+                <env>qa</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prd</id>
+            <properties>
+                <env>prd</env>
+            </properties>
+        </profile>
+    </profiles>
+    <!-- 
+        Propiedades y versiones de las dependencias del proyecto
+    -->
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <oracleHome>${env.ORACLE_HOME}</oracleHome>
+        <maven.clean.version>2.6.1</maven.clean.version>
+        <maven.properties.version>1.0-alpha-2</maven.properties.version>
+        <maven.resource.version>2.7</maven.resource.version>
+        <maven.enforce.version>1.4</maven.enforce.version>
+        <composite.name>${project.artifactId}</composite.name>
+        <composite.revision>1.0</composite.revision>
+        <composite.partition>default</composite.partition>
+        <serverUrl>${soa.deploy.url}</serverUrl>
+        <user>${weblogic.username}</user>
+        <password>${weblogic.password}</password>
+        <overwrite>true</overwrite>
+        <forceDefault>true</forceDefault>
+        <regenerateRulebase>false</regenerateRulebase>
+        <keepInstancesOnRedeploy>true</keepInstancesOnRedeploy>
+    </properties>
+    <build>
+        <sourceDirectory>${project.basedir}/apps</sourceDirectory>
+        <finalName>sca-${project.artifactId}_rev${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/apps</directory>
+            </resource>
+        </resources>
+        <!-- 
+            Filtros :: Filtrar archivos de propiedades
+        -->
+        <filters>
+            <filter>${project.basedir}/../env/${env}/${env}.properties</filter>
+        </filters>
+        <outputDirectory>classes/</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>com.oracle.soa.plugin</groupId>
+                <artifactId>oracle-soa-plugin</artifactId>
+                <version>12.2.1-3-0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipPreIntegrationTest}</skip>
+                            <sarLocation>${project.basedir}/target/sca-${project.artifactId}_rev${project.version}.jar</sarLocation>
+                            <serverUrl>${serverUrl}</serverUrl>
+                            <user>${user}</user>
+                            <password>${password}</password>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 
+                Plugin :: Para solicitar el perfil con las propiedades de los ambientes
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven.enforce.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-property</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireProperty>
+                                    <property>env</property>
+                                    <message>+-----------------------------------------------+ 
+                                             | Debe digitar un valor para la propiedad 'env' | 
+                                             | Ejemplo: mvn -Denv=dev                        |
+                                             +-----------------------------------------------+</message>
+                                </requireProperty>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 
+                Plugin :: Para gestionar los archivos de propiedades con las propiedades de los ambientes
+            -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven.resource.version}</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-project-properties</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/tmp/${env}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/../env/${env}</directory>
+                                    <includes>
+                                        <include>*.properties</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 
+                Plugin :: Para leer las propiedades de los archivos *.properties
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>${maven.properties.version}</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <files>
+                        <file>${project.basedir}/tmp/${env}/${env}.properties</file>
+                    </files>
+                </configuration>
+            </plugin>
+            <!-- 
+                Plugin :: Para limpiar directorio temporal
+            -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven.clean.version}</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}/tmp</directory>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

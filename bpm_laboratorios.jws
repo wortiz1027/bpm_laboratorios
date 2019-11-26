@@ -25,6 +25,8 @@
    </list>
    <list n="listOfChildren">
       <hash><url n="URL" path="bpm_laboratorio1/bpm_laboratorio1.jpr"/></hash>
+      <hash><url n="URL" path="bpm_laboratorio2/bpm_laboratorio2.jpr"/></hash>
+      <hash><url n="URL" path="bpm_laboratorio3/bpm_laboratorio3.jpr"/></hash>
    </list>
    <hash n="oracle.jdeveloper.maven.compiler.MavenConfiguration">
       <hash n="oracle.jdeveloper.maven.compiler.MavenConfiguration">

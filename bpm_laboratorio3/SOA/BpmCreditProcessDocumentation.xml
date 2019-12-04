@@ -15,10 +15,171 @@
          </topicDocumentation>
          <topicDocumentation name="EVT27314379330115">
             <labels>
-               <label locale="en">Fin Credito</label>
+               <label locale="en">Fin Aprobacion Automatica</label>
             </labels>
          </topicDocumentation>
+         <topicDocumentation name="ACT27383737401845">
+            <labels>
+               <label locale="en">[WS] Generar Solicitud</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="ACT27383740727746">
+            <labels>
+               <label locale="en">[WS] Radicar Solicitud</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="ACT27383743269980">
+            <labels>
+               <label locale="en">[RG] Determinar Tipo Aprobacion</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="GTW27383745941222">
+            <labels>
+               <label locale="en">¿Manual o Automatica?</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="ACT27383752708443">
+            <labels>
+               <label locale="en">[WS] Aprobacion Automatica</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="GTW2738375587486">
+            <labels>
+               <label locale="en">¿Aprobacion Automatica Exitosa?</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="ACT27383758664220">
+            <labels>
+               <label locale="en">Aprobacion Manual</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="ACT27383762911861">
+            <labels>
+               <label locale="en">Aprobacion Financiera</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="GTW27383769301597">
+            <labels>
+               <label locale="en">¿Aprobacion Financiera Exitosa?</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="ACT27383785171768">
+            <labels>
+               <label locale="en">[SET] Titulo Instancia</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="ACT27383792949412">
+            <labels>
+               <label locale="en">[WS] Desembolso</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="ACT27383794343893">
+            <labels>
+               <label locale="en">[WS] Notificacion</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="EVT27383803114618">
+            <labels>
+               <label locale="en">Fin Desembolso</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
          <topicDocumentation name="sf27314379330381"/>
+         <topicDocumentation name="sf27383740094793"/>
+         <topicDocumentation name="sf27383741827887"/>
+         <topicDocumentation name="sf27383744859931"/>
+         <topicDocumentation name="sf27383746448292">
+            <labels>
+               <label locale="en">Si</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="sf27383753938184"/>
+         <topicDocumentation name="sf2738375627153">
+            <labels>
+               <label locale="en">No</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="sf27383759888995">
+            <labels>
+               <label locale="en">No</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="sf27383764016057"/>
+         <topicDocumentation name="sf27383770241613">
+            <labels>
+               <label locale="en">Devuelto a validacion Manual</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="sf27383771196965"/>
+         <topicDocumentation name="sf27383786464298"/>
+         <topicDocumentation name="sf2738379602390">
+            <labels>
+               <label locale="en">Aprobado</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
+         <topicDocumentation name="sf27383796525530"/>
+         <topicDocumentation name="sf27383805024472"/>
+         <topicDocumentation name="sf27383808139219">
+            <labels>
+               <label locale="en">Si</label>
+            </labels>
+            <descriptions>
+               <description locale="en"></description>
+            </descriptions>
+         </topicDocumentation>
       </topicDocumentations>
    </component>
 </processDocumentation>

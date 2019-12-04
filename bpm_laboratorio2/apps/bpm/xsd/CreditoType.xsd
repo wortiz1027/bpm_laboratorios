@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:credito="http://developer.io/com/laboratorio/bpm"
+            targetNamespace="http://developer.io/com/laboratorio/bpm" elementFormDefault="qualified">
+  
+  <xsd:complexType name="DocumentoType">
+    <xsd:sequence>
+      <xsd:element name="idTipoDocumento" type="xsd:integer" maxOccurs="1"/>
+      <xsd:element name="numeroDocumento" type="xsd:string" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="SolicitudType">
+    <xsd:sequence>
+      <xsd:element name="idSolicitud" type="xsd:integer" maxOccurs="1"/>
+      <xsd:element name="numeroSolicitud" type="xsd:string" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ClienteType">
+    <xsd:sequence>
+      <xsd:element name="idCliente" type="xsd:integer" maxOccurs="1"/>
+      <xsd:element name="documento" type="credito:DocumentoType" maxOccurs="1"/>
+      <xsd:element name="nombres" type="xsd:string" maxOccurs="1"/>
+      <xsd:element name="apellidos" type="xsd:string" maxOccurs="1"/>
+      <xsd:element name="direccion" type="xsd:string" maxOccurs="1"/>
+      <xsd:element name="telefono" type="xsd:integer" maxOccurs="1"/>
+      <xsd:element name="email" type="xsd:string" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="DetalleSolicitudType">
+    <xsd:sequence>
+      <xsd:element name="idDetalle" type="xsd:integer" maxOccurs="1"/>
+      <xsd:element name="solicitud" type="credito:SolicitudType" maxOccurs="1"/>
+      <xsd:element name="cliente" type="credito:ClienteType" maxOccurs="1"/>
+      <xsd:element name="valorSolicitud" type="xsd:integer" maxOccurs="1"/>
+      <xsd:element name="esAprobada" type="xsd:boolean" maxOccurs="1"/>
+      <xsd:element name="esAutoAprobada" type="xsd:boolean" maxOccurs="1"/>
+      <xsd:element name="motivo" type="xsd:string" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="DecisionesType">
+    <xsd:sequence>
+      <xsd:element name="esAprobacionAutomatica" type="xsd:boolean" maxOccurs="1"/>
+      <xsd:element name="esAutoAprobada" type="xsd:boolean" maxOccurs="1"/>      
+      <xsd:element name="esAprobacionFinanciera" type="xsd:boolean" maxOccurs="1"/>      
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:element name="solicitud" type="credito:SolicitudType" />
+  <xsd:element name="datosProceso" type="credito:DetalleSolicitudType" />
+  <xsd:element name="cliente" type="credito:ClienteType" />
+  <xsd:element name="decisiones" type="credito:DecisionesType" />
+  
+</xsd:schema>
